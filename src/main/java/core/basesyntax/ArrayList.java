@@ -25,7 +25,7 @@ public class ArrayList<T> implements List<T> {
     private void resizeCheck() {
         Object[] newArrayList;
         if (size == arrayList.length) {
-            newArrayList = new Object[arrayList.length << 1];
+            newArrayList = new Object[arrayList.length + (arrayList.length >> 1)];
             System.arraycopy(arrayList, 0, newArrayList, 0, arrayList.length);
             arrayList = newArrayList;
         }
@@ -91,15 +91,15 @@ public class ArrayList<T> implements List<T> {
 
     @Override
     public T remove(T element) {
-        int index = 0;
+        int index = -1;
         for (int i = 0; i <= size; i++) {
-            if (i == size) {
-                throw new NoSuchElementException();
-            }
-            if (Objects.equals(arrayList[i], element)) {
+            if (arrayList[i] == null ? element == null : arrayList[i].equals(element)) {
                 index = i;
                 break;
             }
+        }
+        if (index == -1) {
+            throw new NoSuchElementException();
         }
         final T removedElement = (T) arrayList[index];
         for (int i = index; i < size - 1; i++) {
