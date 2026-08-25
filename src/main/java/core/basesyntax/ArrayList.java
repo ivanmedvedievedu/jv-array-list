@@ -98,7 +98,7 @@ public class ArrayList<T> implements List<T> {
             }
         }
         if (index == -1) {
-            throw new NoSuchElementException();
+            throw new NoSuchElementException("The element was not found, check again");
         }
         final T removedElement = (T) arrayList[index];
         for (int i = index; i < size - 1; i++) {
